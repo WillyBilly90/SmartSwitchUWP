@@ -5,9 +5,51 @@
     xmlns:local="using:SmartSwitchUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    RequestedTheme="Dark">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <CommandBar IsSticky="False" ClosedDisplayMode="Minimal">
+            <AppBarButton x:Name="CredentialMenu" Click="CredentialMenu_Click" x:Uid="CredentialMenu" />
+            <AppBarButton x:Name="CloseProgram" Click="Shutdown_Click" x:Uid="Shutdown"/>
+        </CommandBar>
+        <ListView x:Name="SmartSwitchListView" 
+                  x:Uid="SmartSwitchBox" 
+                  Margin="20,80,0,0" 
+                  Width="auto" 
+                  HorizontalAlignment="Left" 
+                  Height="auto" 
+                  MaxHeight="200"
+                  VerticalAlignment="Top"
+                  Background="Blue"
+                  BorderBrush="Coral" BorderThickness="2" 
+                  ShowsScrollingPlaceholders="True">
+        </ListView>
+        <StackPanel x:Name="SwitchStackPanel" Orientation="Horizontal" Margin="0,0,0,0">
+            <Button x:Name="PowerOnBtn" x:Uid="PowerOnBtn" Margin="20,20,0,0" Background="Green" BorderBrush="Coral" BorderThickness="2" Click="PowerOnBtn_Click"/>
+            <Button x:Name="PowerOffBtn" x:Uid="PowerOffBtn" Margin="20,20,0,0" Background="Red" BorderBrush="Coral" BorderThickness="2" Click="PowerOffBtn_Click"/>
+        </StackPanel>
+        
+        
+        <Popup x:Name="ppup">
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <!--<EdgeUIThemeTransition Edge="Left" />-->
+                    <PaneThemeTransition Edge="Left" />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Grid Width="500" Height="{Binding ElementName=flyoutPane, Path=Height}"  Background="{ThemeResource FlyoutBackgroundThemeBrush}" >
+                <StackPanel Background="Blue" >
+                    <TextBox x:Name="CredentialLbl" x:Uid="CredentialLbl"/>
+                    <TextBox x:Name="UserNameTbx" x:Uid="UsernameTbx" Margin="0,20,0,0"/>
+                    <TextBox x:Name="PasswordTbx" x:Uid="PasswordTbx" Margin="0,20,0,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                        <Button x:Name="CancelBtn" x:Uid="CancelBtn" Click="CancelBtn_Click"/>
+                        <Button x:Name="SaveBtn" x:Uid="SaveBtn" Margin="30,0,0,0" Click="SaveBtn_Click"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel/>
+            </Grid>
+        </Popup>
     </Grid>
 </Page>
